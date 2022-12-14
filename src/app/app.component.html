@@ -29,10 +29,10 @@
       <button [disabled]="!newProductForm.valid" class="btn btn-primary">Add Item</button>
     </form>
 
-    <button disabled id="reload" type="button" class="btn btn-success btn-sm pull-right" style="margin-left: 10px; height: 34px; width: 40px;">
+    <button [disabled]="!activeButtons" id="reload" type="button" class="btn btn-success btn-sm pull-right" style="margin-left: 10px; height: 34px; width: 40px;">
       <span class="glyphicon glyphicon-repeat"></span>
     </button>
-    <button disabled class="btn btn-success pull-right" id="save">Save Changes</button>
+    <button [disabled]="!activeButtons" class="btn btn-success pull-right" id="save">Save Changes</button>
     <hr>
   </div>
   <form [formGroup]="tableForm">
@@ -45,6 +45,10 @@
           </tr>
         </thead>
         <tbody>
+          <tr>
+            <td></td>
+            <td></td>
+          </tr>
         </tbody>
       </table>
     </div>
