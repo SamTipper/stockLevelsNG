@@ -1,0 +1,6 @@
+.table-container{
+    height: 600px;
+    border: 10px solid transparent;
+    overflow: auto;
+    border-radius: 15px;
+}

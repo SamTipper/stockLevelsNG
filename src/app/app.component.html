@@ -35,16 +35,20 @@
     <button disabled class="btn btn-success pull-right" id="save">Save Changes</button>
     <hr>
   </div>
-  <table class="table table-bordered" id="table">
-    <thead>
-      <tr>
-        <th>Product</th>
-        <th>Quantity</th>
-      </tr>
-    </thead>
-    <tbody>
-    </tbody>
-  </table>
+  <form [formGroup]="tableForm">
+    <div class="table-container">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Quantity</th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+    </div>
+  </form>
 </div>
 </body>
 </html>
