@@ -1,6 +1,5 @@
-import { Injectable, Output } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { EventEmitter } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
@@ -30,4 +29,13 @@ export class HttpHandlerService {
      })
   }
 
+  getStockLength(){
+    return this.http.get(
+      "https://API.samtipper.repl.co/get",
+     {
+      headers: {"Api-Key": localStorage.getItem("api-key")},
+      observe: "response",
+      responseType: "text"
+     })
+  }
 }

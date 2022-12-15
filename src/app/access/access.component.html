@@ -1,1 +1,22 @@
-<p>access works!</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Levels - Access</title>
+</head>
+<body>
+    <div class="container">
+        <div class="col-xs-12">
+            <hr>
+            <label>API Key</label><br>
+            <form [formGroup]="newApiKeyForm" (ngSubmit)="onSubmit()">
+                <input formControlName="apiKey" type="password">
+                <span *ngIf="submitted" class="glyphicon glyphicon-ok"></span><br>
+                <button type="submit" class="btn btn-primary" style="margin-top: 5px;">Add Key</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

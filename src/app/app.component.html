@@ -10,12 +10,12 @@
   <nav class="navbar navbar-inverse">
     <div class="container">
       <div class="navbar-header">
-        <a class="navbar-brand" href="index.html">0 Unique Products!</a>
+        <span class="navbar-brand">{{ stockLength }}</span>
       </div>
       <ul class="nav navbar-nav">
-        <li><a href="#">Stock</a></li>
-        <li><a a href="#">Shopping</a></li>
-        <li><a href="#">Access</a></li>
+        <li [routerLinkActive]="['active']"><a [routerLink]="['home']">Stock</a></li>
+        <li [routerLinkActive]="['active']"><a [routerLink]="['temp']">Shopping</a></li>
+        <li [routerLinkActive]="['active']"><a [routerLink]="['access']">Access</a></li>
       </ul>
     </div>
 </nav>
