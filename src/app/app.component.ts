@@ -11,10 +11,13 @@ export class AppComponent implements OnInit{
   newProductForm: FormGroup;
   tableForm: FormGroup;
   private apiKey: string;
-  activeButtons: boolean = false
+  activeButtons: boolean = false;
+  stockObtained: boolean = false;
+  stock: any;
 
   constructor(private httpService: HttpHandlerService){}
 
+  
   ngOnInit(){
     if (localStorage.getItem("api-key") !== null){
       this.apiKey = localStorage.getItem("api-key");
@@ -24,6 +27,7 @@ export class AppComponent implements OnInit{
     this.httpService.onLoad().subscribe((res) => {
       if (res.status === 200){
         this.activeButtons = true;
+        this.getStock();
       }
     })
 
@@ -40,4 +44,15 @@ export class AppComponent implements OnInit{
   onSubmitNewProduct(){
     console.log(this.newProductForm);
   }
+
+  getStock() {
+    this.httpService.getProducts().subscribe((res) => {
+      if (res.status === 200){
+        this.stock = JSON.parse(res.body);
+        this.stockObtained = true;
+      }
+    })
+  }
+
+
 }

@@ -35,19 +35,19 @@
     <button [disabled]="!activeButtons" class="btn btn-success pull-right" id="save">Save Changes</button>
     <hr>
   </div>
-  <form [formGroup]="tableForm">
+  <form *ngIf="stockObtained" [formGroup]="tableForm">
     <div class="table-container">
       <table class="table table-bordered">
-        <thead>
+        <thead class="stick-to-top">
           <tr>
             <th>Product</th>
             <th>Quantity</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td></td>
-            <td></td>
+          <tr *ngFor="let product of stock | keyvalue">
+            <td>{{ product.key }}</td>
+            <td>{{ product.value }}</td>
           </tr>
         </tbody>
       </table>

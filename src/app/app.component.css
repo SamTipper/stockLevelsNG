@@ -4,3 +4,9 @@
     overflow: auto;
     border-radius: 15px;
 }
+
+.stick-to-top{
+    position: sticky;
+    top: 0;
+    background-color: white;
+}
