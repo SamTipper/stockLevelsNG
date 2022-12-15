@@ -1,0 +1,11 @@
+.table-container{
+    height: 600px;
+    border: 10px solid white;
+    overflow: auto;
+}
+
+.stick-to-top{
+    position: sticky;
+    top: 0;
+    background-color: white;
+}

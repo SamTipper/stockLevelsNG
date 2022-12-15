@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stock Levels Home</title>
+</head>
+<body>
+<div class="container">
+  <div class="col-xs-12">
+
+    <form [formGroup]="newProductForm" (ngSubmit)="onSubmitNewProduct()">
+      <label>Add an item!</label><br>
+      <input placeholder="Product Name" formControlName="productName">
+      <input placeholder="Quantity" formControlName="productQuantity">
+      <button [disabled]="!newProductForm.valid" class="btn btn-primary">Add Item</button>
+    </form>
+
+    <hr>
+  </div>
+  <form *ngIf="stockObtained" [formGroup]="tableForm">
+    <div class="table-container">
+      <table class="table table-bordered">
+        <thead class="stick-to-top">
+          <tr>
+            <th>Product</th>
+            <th>Quantity</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let product of stock | keyvalue">
+            <td>{{ product.key }}</td>
+            <td contenteditable="true">{{ product.value }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <button [disabled]="!activeButtons" class="btn btn-success pull-right" (ngSubmit)="saveProductChanges()" style="position: absolute; left: 400px;">Save Changes</button>
+    <button [disabled]="!activeButtons" type="button" class="btn btn-success btn-sm pull-right" style="height: 34px; width: 40px; position: absolute; left: 525px;">
+      <span class="glyphicon glyphicon-repeat"></span>
+    </button>
+  </form>
+</div>
+</body>
+</html>
