@@ -1,3 +1,4 @@
+import { formatCurrency } from '@angular/common';
 import { Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators, NgControl } from '@angular/forms';
 import { HttpHandlerService } from '../services/http-handler.service'
@@ -37,12 +38,24 @@ export class HomeComponent implements OnInit{
       productName: new FormControl(null, Validators.required),
       productQuantity: new FormControl(null, [Validators.required, Validators.pattern("^[0-9]*$")])
     });
-    
+  }
 
+  capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
   }
 
   onSubmitNewProduct(){
-    console.log(this.newProductForm);
+    const name = this.newProductForm.value.productName; const quant = this.newProductForm.value.productQuantity;
+    this.newProductForm.reset();
+    this.stockObtained = false;
+    this.activeButtons = false;
+
+    this.httpService.addNewItem({item: this.capitalizeFirstLetter(name), quantity: quant})
+      .subscribe((res) => {
+        if (res.status === 200){
+          this.getStock()
+        }
+      })
   }
 
   getStock() {

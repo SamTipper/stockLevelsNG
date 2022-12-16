@@ -44,4 +44,10 @@ export class HttpHandlerService {
     return this.http.post(
       "https://api.samtipper.repl.co/update-stock", stock, {headers: headers, observe: "response", responseType: "text"})
   }
+
+  addNewItem(item){
+    const headers = new HttpHeaders({"Api-Key": localStorage.getItem("api-key")});
+    return this.http.post(
+      "https://api.samtipper.repl.co/add-item", item, {headers: headers, observe: "response", responseType: "text"})
+  }
 }
