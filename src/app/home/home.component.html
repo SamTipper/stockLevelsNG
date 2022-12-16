@@ -26,10 +26,10 @@
             <th>Quantity</th>
           </tr>
         </thead>
-        <tbody #tableBody>
+        <tbody>
           <tr *ngFor="let product of stock | keyvalue">
-            <td>{{ product.key }}</td>
-            <td contenteditable="true">{{ product.value }}</td>
+            <th #prodName>{{ product.key }}</th>
+            <th #prodQuantity contenteditable="true" (input)="onQuantityChange(prodName, prodQuantity)">{{ product.value }}</th>
           </tr>
         </tbody>
       </table>

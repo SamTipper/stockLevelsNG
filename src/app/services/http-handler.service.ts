@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -37,5 +37,11 @@ export class HttpHandlerService {
       observe: "response",
       responseType: "text"
      })
+  }
+
+  sendUpdatedStockCount(stock){
+    const headers = new HttpHeaders({"Api-Key": localStorage.getItem("api-key")});
+    return this.http.post(
+      "https://api.samtipper.repl.co/update-stock", stock, {headers: headers, observe: "response", responseType: "text"})
   }
 }

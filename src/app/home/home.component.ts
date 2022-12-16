@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { FormControl, FormGroup, Validators, NgControl } from '@angular/forms';
 import { HttpHandlerService } from '../services/http-handler.service'
 
 @Component({
@@ -9,14 +9,12 @@ import { HttpHandlerService } from '../services/http-handler.service'
 })
 export class HomeComponent implements OnInit{
   newProductForm: FormGroup;
-  tableForm:      FormGroup;
+  quantityForm:   FormGroup;
   private apiKey: string;
   activeButtons:  boolean = false;
   stockObtained:  boolean = false;
   stock:          any;
-
-  @ViewChild('tableBody') tableBody;
-
+  
   constructor(private httpService: HttpHandlerService){}
   
   ngOnInit(){
@@ -39,6 +37,7 @@ export class HomeComponent implements OnInit{
       productName: new FormControl(null, Validators.required),
       productQuantity: new FormControl(null, [Validators.required, Validators.pattern("^[0-9]*$")])
     });
+    
 
   }
 
@@ -57,13 +56,19 @@ export class HomeComponent implements OnInit{
   }
 
   saveProductChanges(){
-    for (let product of this.tableBody.nativeElement.children){
-      console.log(product);
-    }
-
+    this.activeButtons = false;
+    this.httpService.sendUpdatedStockCount(this.stock).subscribe((res) => {
+      if (res.status === 200){
+        this.activeButtons = true;
+      }
+    })
   }
 
-  
-
+  onQuantityChange(prodName, prodQuantity){
+    if (prodQuantity.innerHTML !== "" && +prodQuantity.innerHTML >= 0){
+      this.stock[prodName.innerHTML] = +prodQuantity.innerHTML;
+      console.log(prodName.innerHTML, this.stock[prodName.innerHTML]);
+    }
+  }
 
 }
