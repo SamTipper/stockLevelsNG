@@ -10,10 +10,8 @@ export class ShoppingComponent implements OnInit{
   private apiKey: string;
   shoppingList: any;
   savedListText: string;
-  savedListBool: boolean;
-  activeButtons: boolean;
-  stockObtained: boolean = false;
-
+  unsavedList: boolean;
+  savedList: boolean;
 
   constructor(private httpService: HttpHandlerService){}
 
@@ -32,22 +30,42 @@ export class ShoppingComponent implements OnInit{
   }
 
   getShoppingList(){
+    this.unsavedList = false;
+    this.savedList = false;
+
     this.httpService.getShoppingList().subscribe((res) => {
       if (res.status === 200){
         let list = JSON.parse(res.body);
+        this.savedListText = list['version'] ? "Saved Shopping List" : "Unsaved Shopping List";
+        this.unsavedList = list['version'] ? false : true;
+        this.savedList = list['version'] ? true : false;
         delete list.version;
         this.shoppingList = list;
-        this.savedListText = list['version'] ? "Saved Shopping List" : "Unsaved Shopping List";
-        this.savedListBool = list['version'] ? true : false;
-        this.stockObtained = true;
       }
     })
   }
 
   saveShoppingList(){
-
+    this.httpService.saveShoppingList(this.shoppingList).subscribe((res) => {
+      if (res.status === 200){
+        this.getShoppingList();
+      }
+    })
   }
 
+  newShoppingList(){
+    this.httpService.newShoppingList().subscribe((res) => {
+      if (res.status === 200){
+        this.getShoppingList();
+      }
+    })
+  }
+
+  onQuantityChange(prodName, prodQuantity){
+    if (prodQuantity.innerHTML !== "" && +prodQuantity.innerHTML >= 0){
+      this.shoppingList[prodName.innerHTML] = +prodQuantity.innerHTML;
+    }
+  }
 
 
 }

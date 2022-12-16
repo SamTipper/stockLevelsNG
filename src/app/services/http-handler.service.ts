@@ -68,7 +68,20 @@ export class HttpHandlerService {
      })
   }
 
-  saveShoppingList(){
-    
+  saveShoppingList(shoppingList){
+    const headers = new HttpHeaders({"Api-Key": localStorage.getItem("api-key")});
+    return this.http.post(
+      "https://api.samtipper.repl.co/update-list", shoppingList, {headers: headers, observe: "response", responseType: "text"})
   }
+
+  newShoppingList(){
+    return this.http.get(
+      "https://API.samtipper.repl.co/new-list",
+     {
+      headers: {"Api-Key": localStorage.getItem("api-key")},
+      observe: "response",
+      responseType: "text"
+     })
+  }
+    
 }

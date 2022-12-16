@@ -19,13 +19,13 @@
           <tbody>
             <tr *ngFor="let product of shoppingList | keyvalue">
                 <th #prodName>{{ product.key }}</th>
-                <th #prodQuantity contenteditable="true">{{ product.value }}</th>
+                <th #prodQuantity contenteditable="true" (input)="onQuantityChange(prodName, prodQuantity)">{{ product.value }}</th>
             </tr>
           </tbody>
         </table>
-        <button [disabled]="!savedListBool && !stockObtained" class="btn btn-success">Save Changes</button>
-        <button [disabled]="!savedListBool && !stockObtained" class="btn btn-success">New List</button>
-        <button disabled class="btn btn-success">Shop Done</button>
+        <button [disabled]="!unsavedList" class="btn btn-success" (click)="saveShoppingList()">Save Changes</button>
+        <button [disabled]="!unsavedList && !savedList" (click)="newShoppingList()" class="btn btn-success">New List</button>
+        <button [disabled]="!savedList" class="btn btn-success">Shop Done</button>
       </div>
 </body>
 </html>

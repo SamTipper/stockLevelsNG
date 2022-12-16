@@ -77,7 +77,6 @@ export class HomeComponent implements OnInit{
   onQuantityChange(prodName, prodQuantity){
     if (prodQuantity.innerHTML !== "" && +prodQuantity.innerHTML >= 0){
       this.stock[prodName.innerHTML] = +prodQuantity.innerHTML;
-      console.log(prodName.innerHTML, this.stock[prodName.innerHTML]);
     }
   }
 
