@@ -7,7 +7,7 @@ import { HttpHandlerService } from './services/http-handler.service'
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
-  stockLength: string = "Loading...";
+  stockLength: string = "Stock Levels";
 
   constructor(private httpService: HttpHandlerService){}
 
@@ -17,6 +17,6 @@ export class AppComponent implements OnInit{
       if (res.status === 200){
         this.stockLength = `${res.body} Unique Products!`;
       }
-    })
+    });
   }
 }

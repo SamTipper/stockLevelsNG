@@ -26,13 +26,10 @@ export class ShoppingComponent implements OnInit{
         }
         this.getShoppingList();
       }
-    })
+    });
   }
 
   getShoppingList(){
-    this.unsavedList = false;
-    this.savedList = false;
-
     this.httpService.getShoppingList().subscribe((res) => {
       if (res.status === 200){
         let list = JSON.parse(res.body);
@@ -42,29 +39,43 @@ export class ShoppingComponent implements OnInit{
         delete list.version;
         this.shoppingList = list;
       }
-    })
+    });
   }
 
   saveShoppingList(){
+    this.unsavedList = false;
+    this.savedList = false;
     this.httpService.saveShoppingList(this.shoppingList).subscribe((res) => {
       if (res.status === 200){
         this.getShoppingList();
       }
-    })
+    });
   }
 
   newShoppingList(){
+    this.unsavedList = false;
+    this.savedList = false;
     this.httpService.newShoppingList().subscribe((res) => {
       if (res.status === 200){
         this.getShoppingList();
       }
-    })
+    });
   }
 
   onQuantityChange(prodName, prodQuantity){
     if (prodQuantity.innerHTML !== "" && +prodQuantity.innerHTML >= 0){
       this.shoppingList[prodName.innerHTML] = +prodQuantity.innerHTML;
     }
+  }
+
+  shoppingDoneButton(){
+    this.unsavedList = false;
+    this.savedList = false;
+    this.httpService.submitShopping().subscribe((res) => {
+      if (res.status === 200){
+        this.getShoppingList();
+      }
+    });
   }
 
 

@@ -83,5 +83,15 @@ export class HttpHandlerService {
       responseType: "text"
      })
   }
+
+  submitShopping(){
+    return this.http.get(
+      "https://API.samtipper.repl.co/shopping-done",
+     {
+      headers: {"Api-Key": localStorage.getItem("api-key")},
+      observe: "response",
+      responseType: "text"
+     })
+  }
     
 }
