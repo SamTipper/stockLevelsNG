@@ -7,11 +7,13 @@ import { Routes, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { AccessComponent } from './access/access.component';
 import { HomeComponent } from './home/home.component';
+import { ShoppingComponent } from './shopping/shopping.component';
 
 
 const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
   {path: 'home', component: HomeComponent},
+  {path: 'shopping', component: ShoppingComponent},
   {path: 'access', component: AccessComponent}
 ];
 
@@ -19,7 +21,8 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     HomeComponent,
-    AccessComponent
+    AccessComponent,
+    ShoppingComponent
     
   ],
   imports: [

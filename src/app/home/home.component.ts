@@ -1,6 +1,5 @@
-import { formatCurrency } from '@angular/common';
-import { Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { FormControl, FormGroup, Validators, NgControl } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { HttpHandlerService } from '../services/http-handler.service'
 
 @Component({
@@ -19,11 +18,9 @@ export class HomeComponent implements OnInit{
   constructor(private httpService: HttpHandlerService){}
   
   ngOnInit(){
-    if (localStorage.getItem("api-key") !== null){
-      this.apiKey = localStorage.getItem("api-key");
-    }else{
-      localStorage.setItem("api-key", "temp");
-    }
+    
+    this.httpService.getApiKey();
+    this.apiKey = localStorage.getItem("api-key");
 
     this.httpService.onLoad().subscribe((res) => {
       if (res.status === 200){

@@ -5,9 +5,16 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   providedIn: 'root'
 })
 export class HttpHandlerService {
-  statusCode: number;
+  private apiKey: string;
   constructor(private http: HttpClient) { }
   
+  getApiKey(){
+    if (localStorage.getItem("api-key") !== null){
+      this.apiKey = localStorage.getItem("api-key");
+    }else{
+      localStorage.setItem("api-key", "temp");
+    }
+  }
 
   onLoad(){
     return this.http.get(
@@ -49,5 +56,19 @@ export class HttpHandlerService {
     const headers = new HttpHeaders({"Api-Key": localStorage.getItem("api-key")});
     return this.http.post(
       "https://api.samtipper.repl.co/add-item", item, {headers: headers, observe: "response", responseType: "text"})
+  }
+
+  getShoppingList(){
+    return this.http.get(
+      "https://API.samtipper.repl.co/shopping-list",
+     {
+      headers: {"Api-Key": localStorage.getItem("api-key")},
+      observe: "response",
+      responseType: "text"
+     })
+  }
+
+  saveShoppingList(){
+    
   }
 }
