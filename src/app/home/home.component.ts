@@ -84,4 +84,10 @@ export class HomeComponent implements OnInit{
     }
   }
 
+  onReload(){
+    this.activeButtons = false;
+    this.stockObtained = false;
+    this.getStock();
+  }
+
 }

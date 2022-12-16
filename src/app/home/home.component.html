@@ -9,7 +9,6 @@
 <body>
 <div class="container">
   <div class="col-xs-12">
-
     <form [formGroup]="newProductForm" (ngSubmit)="onSubmitNewProduct()">
       <label>Add an item!</label><br>
       <input placeholder="Product Name" formControlName="productName">
@@ -35,7 +34,7 @@
       </table>
     </div>
     <button [disabled]="!activeButtons" class="btn btn-success pull-right" (click)="saveProductChanges()">Save Changes</button>
-    <button [disabled]="!activeButtons" type="button" class="btn btn-success btn-sm pull-right" style="height: 34px; width: 40px; margin-right: 10px;">
+    <button [disabled]="!activeButtons" type="button" class="btn btn-success btn-sm pull-right" (click)="onReload()" style="height: 34px; width: 40px; margin-right: 10px;">
     <span class="glyphicon glyphicon-repeat"></span>
     </button>
 </div>
