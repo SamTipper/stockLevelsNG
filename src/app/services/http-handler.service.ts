@@ -14,6 +14,7 @@ export class HttpHandlerService {
     }else{
       localStorage.setItem("api-key", "temp");
     }
+    return this.apiKey;
   }
 
   onLoad(){

@@ -19,8 +19,7 @@ export class HomeComponent implements OnInit{
   
   ngOnInit(){
     
-    this.httpService.getApiKey();
-    this.apiKey = localStorage.getItem("api-key");
+    this.apiKey = this.httpService.getApiKey();
 
     this.httpService.onLoad().subscribe((res) => {
       if (res.status === 200){
